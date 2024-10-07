@@ -40,14 +40,13 @@ module.exports = {
 
     app.put('/api/user', async (req, res) => {
       const params = req.body;
-      if (!params.name) {
+      if (!params || !params.name) {
         return res.json({
           success: false,
           message: 'user name is required',
         });
       }
       try {
-        console.log('params12345', params);
         const result = await db.user.upsert({
           where: {
             did: params.did,
